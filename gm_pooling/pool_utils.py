@@ -4,7 +4,6 @@ from itertools import product
 from group_element.cyclic_group_element import CyclicGroupElement
 from group_element.dihedral_group_element import DihedralElement
 
-from utils import generate_elements
     
 def get_nbr_elements(kron_elements, k):
     nbr_elements = [kron_elements[0]]
