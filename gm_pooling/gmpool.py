@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 from itertools import product
 
-from pool_utils import generate_elements, get_nbr_elements, get_subgroup, get_subgroup_cosets, get_indices
+from .pool_utils import generate_elements, get_nbr_elements, get_subgroup, get_subgroup_cosets, get_indices
 
 class GMPool(nn.Module):
     def __init__(self, group, order):

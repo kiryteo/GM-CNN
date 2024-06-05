@@ -3,7 +3,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from utils import generate_neighborhood, get_nbrhood_elements
+from .conv_utils import generate_neighborhood, get_nbrhood_elements
 
 class GMConv(nn.Module):
     def __init__(self, group, order, nbr_size, group_matrix, out_channels):
