@@ -7,7 +7,7 @@ from .pool_utils import generate_elements, get_nbr_elements, get_subgroup, get_s
 
 class GMTransposePool(nn.Module):
     """
-    A transpose pooling layer that uses group matrices for cyclic and dihedral groups.
+    Transpose pooling layer based on subgroup and cosets.
     """
 
     def __init__(self, group, order, in_channels, out_channels):

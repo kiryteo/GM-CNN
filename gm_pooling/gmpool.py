@@ -7,7 +7,7 @@ from .pool_utils import generate_elements, get_nbr_elements, get_subgroup, get_s
 
 class GMPool(nn.Module):
     """
-    A pooling layer that uses group matrices for cyclic and dihedral groups.
+    Pooling layer based on subgroup and cosets.
     """
 
     def __init__(self, group, order, pool='max'):
