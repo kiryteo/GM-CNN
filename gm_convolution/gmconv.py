@@ -6,6 +6,10 @@ import torch.nn as nn
 from .conv_utils import generate_neighborhood, get_nbrhood_elements
 
 class GMConv(nn.Module):
+    """
+    A convolutional layer that uses group matrices for cyclic and dihedral groups.
+    """
+
     def __init__(self, group, order, nbr_size, group_matrix, out_channels):
         """
         Initializes a GMConv module.
@@ -21,12 +25,13 @@ class GMConv(nn.Module):
 
         self.out_channels = out_channels
 
+        # Determine the vector size based on the group type
         if group == 'cyclic':
             vec_size = order * order
         elif group == 'dihedral':
             vec_size = order * order * 4
 
-        # Generate the neighborhood 
+        # Generate the neighborhood
         nbrhood = generate_neighborhood(group, order, nbr_size)
 
         # Get the target elements via direct product of the neighborhood elements
@@ -63,8 +68,11 @@ class GMConv(nn.Module):
         adj_input_tensor = x[:, :, 0, self.index_matrix] * self.err_vector[None, None, :, :]
 
         # Normalize the weight coefficients
-        self.weight_coeff.data /= torch.norm(self.weight_coeff.data, dim=-1, keepdim=True)
+        self.weight_coeff.data /= torch.norm(self.weight_coeff.data, dim=-1, keepdim=True) 
+
         res = torch.einsum('ojk, bikl -> bojl', self.weight_coeff, adj_input_tensor)
 
+        # Add the bias to the result
         results = res + self.bias[None, :, None, None]
+
         return results
