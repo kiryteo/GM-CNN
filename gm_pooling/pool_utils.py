@@ -4,13 +4,7 @@ from itertools import product
 from group_element.cyclic_group_element import CyclicGroupElement
 from group_element.dihedral_group_element import DihedralElement
 
-def generate_elements(group, order):
-    if group == 'dihedral':
-        elements_rotations = [DihedralElement(r, 0, order) for r in range(order)]
-        elements_flips = [DihedralElement(r, 1, order) for r in range(order)]
-        return elements_rotations + elements_flips
-    elif group == 'cyclic':
-        return [CyclicGroupElement(k, order) for k in range(order)]
+from utils import generate_elements
     
 def get_nbr_elements(kron_elements, k):
     nbr_elements = [kron_elements[0]]
