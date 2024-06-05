@@ -1,4 +1,4 @@
-from group_element.group_element import GroupElement
+from .group_element import GroupElement
 
 class PermutationElement(GroupElement):
     def __init__(self, permutation):
