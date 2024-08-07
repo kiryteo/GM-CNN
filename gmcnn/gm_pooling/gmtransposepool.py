@@ -3,7 +3,8 @@ import torch.nn as nn
 from itertools import product
 import math
 
-from .pool_utils import generate_elements, get_nbr_elements, get_subgroup, get_subgroup_cosets, get_indices
+from gmcnn.utils import generate_elements
+from .pool_utils import get_nbr_elements, get_subgroup, get_subgroup_cosets, get_indices
 
 class GMTransposePool(nn.Module):
     """
