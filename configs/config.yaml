@@ -1,0 +1,6 @@
+defaults:
+  - exp: cifar10  # Default dataset configuration, can be overridden from the command line
+
+# Add any additional global configurations here if needed
+experiment:
+  seed: 42
