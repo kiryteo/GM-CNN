@@ -1,59 +1,53 @@
-import math
-import numpy as np
 import torch
 import torch.nn as nn
+import numpy as np
+import math
 
-from .conv_utils import generate_neighborhood, get_nbrhood_elements
+from conv_utils import generate_neighborhood, get_nbrhood_elements
+from abc import ABC, abstractmethod
 
-class GMConv(nn.Module):
+class GMConvBase(nn.Module):
     """
-    A convolutional layer that uses group matrices for cyclic and dihedral groups.
+    Base class for Group Matrix Convolution (GMConv) layers.
+    Contains common functionality for both classification and regression tasks.
     """
-
-    def __init__(self, group, order, nbr_size, group_matrix, out_channels):
+    def __init__(self, group, order, nbr_size, group_matrix, out_channels, error=False):
         """
-        Initializes a GMConv module.
+        Initializes the GMConvBase layer.
 
         Args:
-            group (str): The type of group. Can be 'cyclic' or 'dihedral'.
+            group (str): The group type.
             order (int): The order of the group.
             nbr_size (int): The size of the neighborhood.
-            group_matrix (numpy.ndarray): The group matrix.
+            group_matrix (np.ndarray): The group matrix.
             out_channels (int): The number of output channels.
         """
         super().__init__()
 
         self.out_channels = out_channels
-
-        # Determine the vector size based on the group type
-        if group == 'cyclic':
-            vec_size = order * order
-        elif group == 'dihedral':
-            vec_size = order * order * 4
+        self.error = error
 
         # Generate the neighborhood
-        nbrhood = generate_neighborhood(group, order, nbr_size)
+        self.nbrhood = generate_neighborhood(group, order, nbr_size)
 
         # Get the target elements via direct product of the neighborhood elements
-        target_elements = get_nbrhood_elements(nbrhood)
+        self.target_elements = get_nbrhood_elements(self.nbrhood)
 
         # Get the indices of the target elements in the group matrix
-        self.index_matrix = np.array([np.where(group_matrix.T == element)[1] for element in target_elements])
+        self.index_matrix = np.array([np.where(group_matrix.T == element)[1] for element in self.target_elements])
 
         # Initialize the bias
         self.bias = nn.Parameter(torch.zeros(out_channels))
 
         # Initialize the weight coefficients
-        self.weight_coeff = nn.Parameter(torch.empty(self.out_channels, 1, len(target_elements)))
+        self.weight_coeff = nn.Parameter(torch.empty(self.out_channels, 1, len(self.target_elements)))
         nn.init.kaiming_uniform_(self.weight_coeff, a=math.sqrt(5))
 
-        # Initialize the error vector
-        self.err_vector = nn.Parameter(torch.empty(1, vec_size))
-        nn.init.kaiming_uniform_(self.err_vector, a=math.sqrt(5))
-
+    @abstractmethod
     def forward(self, x):
         """
-        Performs forward pass of the GMConv module.
+        Forward pass for the GMConvBase layer.
+        To be overridden by subclasses.
 
         Args:
             x (torch.Tensor): The input tensor.
@@ -61,18 +55,4 @@ class GMConv(nn.Module):
         Returns:
             torch.Tensor: The output tensor.
         """
-        # Normalize the error vector
-        self.err_vector.data /= torch.norm(self.err_vector.data)
-
-        # Compute the adjusted input tensor and 'scale' it with the error vector
-        adj_input_tensor = x[:, :, 0, self.index_matrix] * self.err_vector[None, None, :, :]
-
-        # Normalize the weight coefficients
-        self.weight_coeff.data /= torch.norm(self.weight_coeff.data, dim=-1, keepdim=True) 
-
-        res = torch.einsum('ojk, bikl -> bojl', self.weight_coeff, adj_input_tensor)
-
-        # Add the bias to the result
-        results = res + self.bias[None, :, None, None]
-
-        return results
+        pass

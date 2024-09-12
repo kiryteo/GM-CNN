@@ -1,9 +1,9 @@
 import math
 
-from gmcnn.group_element.cyclic_group_element import CyclicGroupElement
-from gmcnn.group_element.dihedral_group_element import DihedralElement
+from ..group_element.cyclic_group_element import CyclicGroupElement
+from ..group_element.dihedral_group_element import DihedralElement
 
-from gmcnn.utils import generate_elements
+from ...utils import generate_elements
 
 def generate_neighborhood(group, n, t):
     """
