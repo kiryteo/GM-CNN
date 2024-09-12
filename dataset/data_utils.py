@@ -62,8 +62,6 @@ def split_train_val(train_X, train_Y, val_fraction, train_fraction=None):
     return train_X, train_Y, val_X, val_Y
 
 def get_bg_rot_data(train_loc, test_loc):
-    #train_loc = '/localscratch/asa420/data/mnist_bg_rot/train_normalized'
-    #test_loc = '/localscratch/asa420/data/mnist_bg_rot/test_normalized'
 
     train_data = pkl.load(open(train_loc, 'rb'))
     train_X = train_data['X']

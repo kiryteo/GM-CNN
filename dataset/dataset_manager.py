@@ -5,7 +5,7 @@ from torchvision import transforms
 import numpy as np
 import pickle as pkl
 
-from data_utils import *
+from data_utils import load_amat_file, RotMNIST, split_train_val, get_bg_rot_data
 
 class DatasetManager:
     def __init__(self, cfg, overfit=False):
@@ -59,7 +59,7 @@ class DatasetManager:
         return self._create_dataloaders(train_dataset, valid_dataset, test_dataset)
 
     def _load_mnist_bg_rot(self):
-        train_X, train_Y, test_X, test_Y = get_bg_rot_data()  # Assumes this function is defined
+        train_X, train_Y, test_X, test_Y = get_bg_rot_data()
         train_X, train_Y, val_X, val_Y = split_train_val(train_X, train_Y, val_fraction=0.2, train_fraction=None)
         train_dataset = TensorDataset(train_X, train_Y)
         valid_dataset = TensorDataset(val_X, val_Y)
