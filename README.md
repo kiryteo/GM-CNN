@@ -1,6 +1,6 @@
 # Symmetry-Based Structured Matrices for Flexible Parameter-Efficient Learning
 
-Code for the paper: Symmetry-Based Structured Matrices for Flexible Parameter-Efficient Learning.
+This repository contains the source code accompanying the paper: Symmetry-Based Structured Matrices for Flexible Parameter-Efficient Learning.
 
 ### Abstract
 
