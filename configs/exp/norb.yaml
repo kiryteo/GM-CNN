@@ -1,53 +1,32 @@
-# Config for ImplicitCNN
+# dataset: norb
 
 # Model
 model:
   group: cyclic
   order: 32
   nbr: 3
-  #err_idx: 511
   lr: 0.009
   dataset: norb
   num_classes: 6
   dropout: 0.3
-  num_layers: 3
-  out_channels: [48, 96, 160] 
+  blocks:
+    - num_layers: 1
+      out_channels: [120]
+    - num_layers: 1
+      out_channels: [120]
 
 # Data
 data:
-  batch_size: 960 
+  path: /path/to/data/norb/
+  batch_size: 256
   num_workers: 8
 
 # Training
 trainer:
   accelerator: gpu
   devices: 1
-  #strategy: ddp_find_unused_parameters_false
   max_epochs: 150
-  #gradient_clip_val: 0.9
   log_every_n_steps: 10
-
-tester:
-  accelerator: gpu
-  devices: 1
-  num_nodes: 1
 
 overfit:
   bs: 1
-# Callbacks
-#callbacks:
-#  model_checkpoint:
-#    _target_: pytorch_lightning.callbacks.ModelCheckpoint
-#    monitor: val_accuracy
-#    mode: max
-#
-#  lr_monitor:
-#    _target_: pytorch_lightning.callbacks.LearningRateMonitor
-#    logging_interval: step
-
-# Logger
-#logger:
-#  wandb:
-#    _target_: pytorch_lightning.loggers.WandbLogger
-#    project: Partial_equivariance
-#    log_model: gradients

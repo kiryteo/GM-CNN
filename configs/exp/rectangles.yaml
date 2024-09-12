@@ -1,4 +1,4 @@
-# Config for ImplicitCNN
+# dataset: rectangles
 
 # Model
 model:
@@ -9,11 +9,15 @@ model:
   dataset: rect
   num_classes: 2
   dropout: 0.3
-  num_layers: 3
-  out_channels: [120, 120]
+  blocks:
+    - num_layers: 1
+      out_channels: [120]
+    - num_layers: 1
+      out_channels: [120]
 
 # Data
 data:
+  path: /path/to/data/rectangles/
   batch_size: 512
   num_workers: 4
 
@@ -23,11 +27,6 @@ trainer:
   devices: 1
   max_epochs: 100
   log_every_n_steps: 10
-
-tester:
-  accelerator: gpu
-  devices: 1
-  num_nodes: 1
 
 overfit:
   bs: 1
