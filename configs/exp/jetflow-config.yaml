@@ -1,0 +1,51 @@
+# dataset: "JetFlow"
+
+# Model
+model:
+  group_a: dihedral
+  order_a: 31
+  group_b: cyclic
+  order_b: 23
+  nbr_a: 1
+  nbr_b: 1
+  lr: 0.003
+  dataset: JetFlow
+  out_channels: 2
+  dropout: 0.2
+  blocks:
+    - num_layers: 1
+      out_channels: [120]
+    - num_layers: 1
+      out_channels: [120]
+
+data:
+  batch_size: 32
+  num_workers: 4
+  input_length: 10
+  mid: 22
+  output_length: 6
+  direc: "/path/to/data"
+  train_task: [(1, 4), (3, 4), (2, 4), (1, 1), (2, 6), (3, 5),
+                  (3, 3), (3, 1), (1, 8), (3, 8), (3, 6), (2, 1),
+                  (1, 3), (1, 6), (2, 8), (1, 7), (1, 2), (2, 2)]
+  test_domain_task: [(2, 3), (3, 7), (2, 7), (2, 5), (3, 2), (1, 5)]
+  valid_task: [(1, 4), (3, 4), (2, 4), (1, 1), (2, 6), (3, 5),
+                  (3, 3), (3, 1), (1, 8), (3, 8), (3, 6), (2, 1),
+                  (1, 3), (1, 6), (2, 8), (1, 7), (1, 2), (2, 2)]
+  test_future_task: [(1, 4), (3, 4), (2, 4), (1, 1), (2, 6), (3, 5),
+                  (3, 3), (3, 1), (1, 8), (3, 8), (3, 6), (2, 1),
+                  (1, 3), (1, 6), (2, 8), (1, 7), (1, 2), (2, 2)]
+  train_time: [0, 160]
+  valid_time: [160, 200]
+  test_future_time: [200, 250]
+  test_domain_time: [0, 100]
+  stack: true
+
+trainer:
+  accelerator: gpu
+  devices: 1
+  max_epochs: 100
+  log_every_n_steps: 10
+
+overfit:
+  bs: 1

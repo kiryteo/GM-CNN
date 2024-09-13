@@ -1,0 +1,55 @@
+# dataset: "PhiFlow"
+
+# Model
+model:
+  group: cyclic
+  order: 64
+  nbr: 1
+  lr: 0.003
+  dataset: PhiFlow
+  out_channels: 2
+  dropout: 0.2
+  blocks:
+    - num_layers: 1
+      out_channels: [120]
+    - num_layers: 1
+      out_channels: [120]
+
+data:
+  batch_size: 32
+  num_workers: 4
+  input_length: 10
+  mid: 22
+  output_length: 6
+  direc: "/path/to/data"
+  train_task: [(27, 2), (33, 0), (3, 2), (28, 3),(9, 0),
+                      (12, 3), (22, 1), (8, 3), (30, 1), (25, 0),
+                      (16, 3), (11, 2), (23, 2), (29, 0), (36, 3),
+                      (26, 1), (1, 0), (35, 2), (19, 2), (34, 1),
+                      (4, 3), (2, 1), (7, 2), (31, 2), (17, 0)]
+  test_domain_task: [(6, 1), (14, 1), (15, 2), (10, 1), (18, 1),
+                            (20, 3), (24, 3), (13, 0), (21, 0), (5, 0)]
+  valid_task: [(27, 2), (33, 0), (3, 2), (28, 3),(9, 0),
+                      (12, 3), (22, 1), (8, 3), (30, 1), (25, 0),
+                      (16, 3), (11, 2), (23, 2), (29, 0), (36, 3),
+                      (26, 1), (1, 0), (35, 2), (19, 2), (34, 1),
+                      (4, 3), (2, 1), (7, 2), (31, 2), (17, 0)]
+  test_future_task: [(27, 2), (33, 0), (3, 2), (28, 3),(9, 0),
+                      (12, 3), (22, 1), (8, 3), (30, 1), (25, 0),
+                      (16, 3), (11, 2), (23, 2), (29, 0), (36, 3),
+                      (26, 1), (1, 0), (35, 2), (19, 2), (34, 1),
+                      (4, 3), (2, 1), (7, 2), (31, 2), (17, 0)]
+  train_time: [0, 160]
+  valid_time: [160, 200]
+  test_future_time: [200, 250]
+  test_domain_time: [0, 100]
+  stack: true
+
+trainer:
+  accelerator: gpu
+  devices: 1
+  max_epochs: 100
+  log_every_n_steps: 10
+
+overfit:
+  bs: 1

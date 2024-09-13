@@ -1,0 +1,42 @@
+# dataset: "PhiFlow"
+
+# Model
+model:
+  group: cyclic
+  order: 64
+  nbr: 1
+  lr: 0.003
+  dataset: PhiFlow
+  out_channels: 2
+  dropout: 0.2
+  blocks:
+    - num_layers: 1
+      out_channels: [120]
+    - num_layers: 1
+      out_channels: [120]
+
+data:
+  batch_size: 32
+  num_workers: 4
+  input_length: 10
+  mid: 22
+  output_length: 6
+  direc: "/path/to/data"
+  train_task: [27, 9, 7, 11, 4, 26, 35, 2, 29, 10, 34, 12, 37, 28, 18, 24, 8, 14, 1, 31, 25, 0, 19, 15, 36, 3, 20, 13]
+  valid_task: [27, 9, 7, 11, 4, 26, 35, 2, 29, 10, 34, 12, 37, 28, 18, 24, 8, 14, 1, 31, 25, 0, 19, 15, 36, 3, 20, 13]
+  test_future_task: [27, 9, 7, 11, 4, 26, 35, 2, 29, 10, 34, 12, 37, 28, 18, 24, 8, 14, 1, 31, 25, 0, 19, 15, 36, 3, 20, 13]
+  test_domain_task: [5, 30, 16, 23, 33, 6, 17, 22, 21, 32]
+  train_time: [0, 160]
+  valid_time: [160, 200]
+  test_future_time: [200, 250]
+  test_domain_time: [0, 100]
+  stack: true
+
+trainer:
+  accelerator: gpu
+  devices: 1
+  max_epochs: 100
+  log_every_n_steps: 10
+
+overfit:
+  bs: 1
