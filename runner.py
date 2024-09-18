@@ -128,9 +128,7 @@ def main(cfg: DictConfig):
     with torch.no_grad():
         for data in test_loader:
             images, labels = data[0].to(device), data[1].to(device)
-            # calculate outputs by running images through the network
             outputs = model(images)
-            # the class with the highest energy is what we choose as prediction
             _, predicted = torch.max(outputs.data, 1)
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
