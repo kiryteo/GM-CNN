@@ -24,7 +24,18 @@ This repository is structured as follows:
 
 All experiments can be checked using `runner.py` script. A simple way to run the experiment on CIFAR10: ``python runner.py exp=cifar10``
 
-### Cite
+### License
+
+MIT. Other licenses may apply to third-party source code noted in file headers.
+
+### Citation
 If you find this work useful in your research, please consider citing:
 
-TODO
+```
+@article{samudre2024symmetry,
+  title={Symmetry-Based Structured Matrices for Efficient Approximately Equivariant Networks},
+  author={Samudre, Ashwin and Petrache, Mircea and Nord, Brian D and Trivedi, Shubhendu},
+  journal={arXiv preprint arXiv:2409.11772},
+  year={2024}
+}
+```
