@@ -28,7 +28,7 @@ All experiments can be checked using `runner.py` script. A simple way to run the
 
 MIT. Other licenses may apply to third-party source code noted in file headers.
 
-### Citation
+<!-- ### Citation
 If you find this work useful in your research, please consider citing:
 
 ```
@@ -38,4 +38,4 @@ If you find this work useful in your research, please consider citing:
   journal={arXiv preprint arXiv:2409.11772},
   year={2024}
 }
-```
+``` -->
