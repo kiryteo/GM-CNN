@@ -3,7 +3,7 @@ import math
 from ..group_element.cyclic_group_element import CyclicGroupElement
 from ..group_element.dihedral_group_element import DihedralElement
 
-from ...utils import generate_elements
+from ..utils.utils import generate_elements
 
 def generate_neighborhood(group, n, t):
     """

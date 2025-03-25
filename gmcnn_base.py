@@ -5,7 +5,7 @@ from gmcnn.gm_convolution.gmconv import GMConvBase
 from gmcnn.gm_convolution.gmconv_classification import GMConvCls
 from gmcnn.gm_convolution.gmconv_regression import GMConvReg
 from gmcnn.gm_pooling.gmpool import GMPool
-from utils import generate_elements, get_group_matrix, kronecker_product
+from gmcnn.utils.utils import generate_elements, get_group_matrix, kronecker_product
 
 class GMCNNBase(nn.Module):
     """

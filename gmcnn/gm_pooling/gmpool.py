@@ -2,8 +2,8 @@ import torch
 import torch.nn as nn
 from itertools import product
 
-from ..utils import generate_elements
-from pool_utils import get_nbr_elements, get_dihedral_subgroup, get_subgroup, get_subgroup_cosets, get_indices
+from ..utils.utils import generate_elements
+from .pool_utils import get_nbr_elements, get_dihedral_subgroup, get_subgroup, get_subgroup_cosets, get_indices
 
 class GMPool(nn.Module):
     """

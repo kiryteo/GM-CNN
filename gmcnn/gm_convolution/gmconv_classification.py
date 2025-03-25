@@ -3,7 +3,7 @@ import torch.nn as nn
 import numpy as np
 import math
 
-from conv_utils import get_central_indices
+from .conv_utils import get_central_indices
 from .gmconv import GMConvBase
 
 class GMConvCls(GMConvBase):

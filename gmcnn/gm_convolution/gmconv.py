@@ -3,7 +3,7 @@ import torch.nn as nn
 import numpy as np
 import math
 
-from conv_utils import generate_neighborhood, get_nbrhood_elements
+from .conv_utils import generate_neighborhood, get_nbrhood_elements
 from abc import ABC, abstractmethod
 
 class GMConvBase(nn.Module):

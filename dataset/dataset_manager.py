@@ -5,7 +5,7 @@ from torchvision import transforms
 import numpy as np
 import pickle as pkl
 
-from data_utils import load_amat_file, RotMNIST, split_train_val, get_bg_rot_data, EqDataset
+from .data_utils import load_amat_file, RotMNIST, split_train_val, get_bg_rot_data, EqDataset
 
 
 class DatasetManager:
@@ -69,8 +69,8 @@ class DatasetManager:
             transforms.ToTensor(),
             transforms.Normalize((0.4914, 0.4822, 0.4465), (0.247, 0.243, 0.261))
         ])
-        train_dataset = torchvision.datasets.CIFAR10(root=self.data.path, train=True, transform=transform, download=False)
-        test_dataset = torchvision.datasets.CIFAR10(root=self.data.path, train=False, transform=transform, download=False)
+        train_dataset = torchvision.datasets.CIFAR10(root=self.data.path, train=True, transform=transform, download=True)
+        test_dataset = torchvision.datasets.CIFAR10(root=self.data.path, train=False, transform=transform, download=True)
         train_dataset, valid_dataset = self._split_dataset(train_dataset)
         return self._create_dataloaders(train_dataset, valid_dataset, test_dataset)
 
