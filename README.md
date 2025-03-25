@@ -7,7 +7,7 @@ This repository contains the source code accompanying the paper: [Symmetry-Based
 There has been much recent interest in designing neural networks (NNs) with relaxed equivariance, which interpolate between exact equivariance and full flexibility for consistent performance gains. In a separate line of work, structured parameter matrices with low displacement rank (LDR)—which permit fast function and gradient evaluation—have been used to create compact NNs, though primarily benefiting classical convolutional neural networks (CNNs). In this work, we propose a framework based on symmetry-based structured matrices to build approximately equivariant NNs with fewer parameters. Our approach unifies the aforementioned areas using Group Matrices (GMs), a forgotten precursor to the modern notion of regular representations of finite groups. GMs allow the design of structured matrices similar to LDR matrices, which can generalize all the elementary operations of a CNN from cyclic groups to arbitrary finite groups. We show GMs can also generalize classical LDR theory to general discrete groups, enabling a natural formalism for approximate equivariance. We test GM-based architectures on various tasks with relaxed symmetry and find that our framework performs competitively with approximately equivariant NNs and other structured matrix-based methods, often with one to two orders of magnitude fewer parameters.
 
 ### Installation
-
+This project was developed and tested on Ubuntu (Linux) and is currently supported for this OS only.
 The `environment.yml` files contains the dependencies required for this project. Clone the repository and run the following command from the root of this directory:
 
 ``` 
